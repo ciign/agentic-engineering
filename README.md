@@ -91,7 +91,10 @@ These agents **guide** and **validate** work:
 
 ## 💡 How to Use the Agents
 
-### Understanding Agent Types
+### Understanding Agent Types & Agent Philosophy
+
+<img width="944" height="459" alt="Screenshot 2025-11-22 at 9 13 09 PM" src="https://github.com/user-attachments/assets/27576106-8345-4542-b7c3-ffb09893d7f2" />
+
 
 **Worker Agents** → Execute tasks, build features, fix bugs
 ```bash
