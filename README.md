@@ -69,21 +69,22 @@ This agent system is built on **Carl Jung's cognitive functions** to create a ps
 ---
 
 <div align="center">
+<img width="944" height="459" alt="Screenshot 2025-11-22 at 9 13 09 PM" src="https://github.com/user-attachments/assets/27576106-8345-4542-b7c3-ffb09893d7f2" />
 
 ### 🎯 The Pattern in Action
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                                                                         │
-│  🔧 WORKERS (6)              ⚖️  BALANCE  ⚖️              🏛️ GOVERNANCE (6)  │
-│  ═══════════════                                         ═══════════════  │
+│     WORKERS (6)                 BALANCE                GOVERNANCE (6)   │
+│  ═══════════════                                         ═══════════════│
 │                                                                         │
-│  🔵 Backend Specialist       ←─────────────→       💜 System Architect  │
-│  🟢 Frontend Specialist      ←─────────────→       🩷 UX Designer       │
-│  🟤 Database Designer        ←─────────────→       🩵 Product Owner     │
-│  🩵 DevOps Engineer          ←─────────────→       🔴 Code Reviewer     │
-│  🟣 Full-Stack Developer     ←─────────────→       🔴 Security Auditor  │
-│  🟠 Debugger                 ←─────────────→       🟡 Test Writer       │
+│  🔵 Backend Specialist       ←─────────────→       💜 System Architect   │
+│  🟢 Frontend Specialist      ←─────────────→       🩷 UX Designer        │
+│  🟤 Database Designer        ←─────────────→       🩵 Product Owner      │
+│  🩵 DevOps Engineer          ←─────────────→       🔴 Code Reviewer      │
+│  🟣 Full-Stack Developer     ←─────────────→       🔴 Security Auditor   │
+│  🟠 Debugger                 ←─────────────→       🟡 Test Writer        │
 │                                                                         │
 │            EXECUTION                                    DIRECTION       │
 │            Implementation                               Validation      │
