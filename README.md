@@ -28,10 +28,10 @@ This agent system is built on **Carl Jung's cognitive functions** to create a ps
 ### 🔧 **WORKER AGENTS** (6)
 **Cognitive Function: Sensing**
 
-🔵 **Practical Execution**
-🔵 **Detail-Oriented**
-🔵 **Present-Focused**
-🔵 **Implementation**
+- 🔵 **Practical Execution**
+- 🔵 **Detail-Oriented**
+- 🔵 **Present-Focused**
+- 🔵 **Implementation**
 
 **Role:** Build features, fix bugs, execute tasks
 
@@ -41,9 +41,9 @@ This agent system is built on **Carl Jung's cognitive functions** to create a ps
 ### 🏛️ **GOVERNANCE AGENTS** (6)
 **Cognitive Functions: Mixed**
 
-💜 **Strategic Direction** (Intuition)
-🔴 **Quality Validation** (Thinking)
-🩷 **User Empathy** (Feeling)
+- 💜 **Strategic Direction** (Intuition)
+- 🔴 **Quality Validation** (Thinking)
+- 🩷 **User Empathy** (Feeling)
 
 **Role:** Guide vision, ensure quality, validate work
 
