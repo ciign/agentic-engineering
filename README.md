@@ -454,6 +454,24 @@ Each worker agent embodies **practical, detail-oriented execution**:
 - **[OpenCode Documentation](https://opencode.ai/docs)** - Official OpenCode docs
 - **Individual Agent Files** - Each agent's `.md` file contains their philosophy, approach, and expertise
 
+## 📚 Interactive Learning Deck
+
+Learn the Agentic Engineering approach with our interactive presentation:
+
+```bash
+cd learn
+npm install
+npm run dev
+```
+
+The deck covers:
+- The Worker-Governance Pattern
+- All 12 agents and their roles
+- Step-by-step workflow examples
+- Live code demonstrations
+
+Navigate with arrow keys or click the dots to jump between slides.
+
 ## 🎨 Design Philosophy
 
 This agent system is designed around **psychological balance**:
