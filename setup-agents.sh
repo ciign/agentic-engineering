@@ -60,13 +60,9 @@ select_tool() {
     echo -e "${YELLOW}└─────────────────────────────────────────────────────────┘${NC}"
     echo ""
 
-    # Handle both interactive and piped input
-    if [ -t 0 ]; then
-        read -p "Select tool [1/2]: " tool_choice
-    else
-        tool_choice="1"
-        echo "Non-interactive mode: defaulting to Claude Code"
-    fi
+    # Read from /dev/tty to allow interactive input even when piped
+    echo -n "Select tool [1/2]: "
+    read tool_choice < /dev/tty
 }
 
 # Select installation location
@@ -77,12 +73,9 @@ select_location() {
     echo "1) Current project (recommended)"
     echo "2) Global (all projects)"
 
-    if [ -t 0 ]; then
-        read -p "Choose [1/2]: " location_choice
-    else
-        location_choice="1"
-        echo "Non-interactive mode: defaulting to project installation"
-    fi
+    # Read from /dev/tty to allow interactive input even when piped
+    echo -n "Choose [1/2]: "
+    read location_choice < /dev/tty
 
     if [ "$tool" = "claude" ]; then
         case $location_choice in
