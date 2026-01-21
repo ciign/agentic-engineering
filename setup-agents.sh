@@ -1034,6 +1034,11 @@ EOF
 # Show completion message
 show_completion() {
     local tool=$1
+    local start_cmd="claude"
+    if [ "$tool" = "opencode" ]; then
+        start_cmd="opencode"
+    fi
+
     echo ""
     echo -e "${GREEN}============================================================${NC}"
     echo -e "${GREEN}  Successfully installed 12 agents to $AGENT_DIR${NC}"
@@ -1053,18 +1058,39 @@ show_completion() {
     echo -e "${YELLOW}The Worker-Governance Pattern:${NC}"
     echo "  'Equal Halves make the whole, neither side takes control.'"
     echo ""
-    echo -e "${CYAN}Workflow:${NC}"
-    echo "  1. VISION:       @product-owner @ux-designer"
-    echo "  2. ARCHITECTURE: @system-architect @database-designer"
-    echo "  3. EXECUTION:    @backend-specialist @frontend-specialist @devops-engineer"
-    echo "  4. QUALITY:      @code-reviewer @security-auditor @test-writer"
+    echo -e "${WHITE}Getting Started:${NC}"
+    echo -e "  ${GREEN}$start_cmd${NC}"
     echo ""
-
-    if [ "$tool" = "claude" ]; then
-        echo -e "${GREEN}Start Claude Code with: claude${NC}"
-    else
-        echo -e "${GREEN}Start OpenCode with: opencode${NC}"
-    fi
+    echo -e "${CYAN}Usage Examples:${NC}"
+    echo ""
+    echo -e "  ${YELLOW}1. Define what to build:${NC}"
+    echo "     @product-owner define MVP for a task management app"
+    echo "     @ux-designer design the user flow for task creation"
+    echo ""
+    echo -e "  ${YELLOW}2. Design architecture:${NC}"
+    echo "     @system-architect design architecture for FastAPI + PostgreSQL"
+    echo "     @database-designer design schema for tasks and users"
+    echo ""
+    echo -e "  ${YELLOW}3. Build backend:${NC}"
+    echo "     @backend-specialist implement the task CRUD API"
+    echo "     @backend-specialist add JWT authentication"
+    echo ""
+    echo -e "  ${YELLOW}4. Build frontend:${NC}"
+    echo "     @frontend-specialist create a React dashboard"
+    echo "     @frontend-specialist implement login form with validation"
+    echo "     @full-stack-developer build task creation end-to-end"
+    echo ""
+    echo -e "  ${YELLOW}5. Review quality:${NC}"
+    echo "     @code-reviewer review this implementation"
+    echo "     @security-auditor review the authentication code"
+    echo "     @test-writer create tests for the API"
+    echo ""
+    echo -e "  ${YELLOW}6. Deploy:${NC}"
+    echo "     @devops-engineer create Dockerfile and CI/CD pipeline"
+    echo "     @devops-engineer deploy to Cloud Run"
+    echo ""
+    echo -e "  ${YELLOW}7. Debug issues:${NC}"
+    echo "     @debugger fix this authentication error"
     echo ""
     echo "Documentation: github.com/ciign/agentic-engineering"
     echo ""
