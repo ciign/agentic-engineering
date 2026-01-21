@@ -1,13 +1,16 @@
-# Agentic Engineering 🤖
+# Agentic Engineering
 
 <div align="center">
 
-**A psychologically-balanced team of 12 specialized AI agents for software development with Claude Code.**
+<img src="images/agentic-engineering.png" alt="Agentic Engineering Logo" width="250" />
 
-*Based on **Jungian cognitive functions** to create optimal team dynamics for motivation, innovation, and delivery.*
+**A psychologically-balanced team of 12 specialized AI agents for software development.**
+
+*Works with **Claude Code** and **OpenCode**. Based on **Jungian cognitive functions** for optimal team dynamics.*
 
 [![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)
-[![Claude Code](https://img.shields.io/badge/Claude-Code-blueviolet)](https://www.claude.com/product/claude-code)
+[![Claude Code](https://img.shields.io/badge/Claude-Code-blueviolet)](https://claude.ai/claude-code)
+[![OpenCode](https://img.shields.io/badge/OpenCode-AI-green)](https://opencode.ai)
 
 </div>
 
@@ -101,29 +104,31 @@ This agent system is built on **Carl Jung's cognitive functions** to create a ps
 
 ## 🚀 Quick Start
 
-### Installation
+### One-Line Install
+
+```bash
+curl -sSL https://raw.githubusercontent.com/ciign/agentic-engineering/main/setup-agents.sh | bash
+```
+
+The script will:
+- 🤖 Ask you to choose: **Claude Code** or **OpenCode**
+- 📁 Ask for installation location: **Project** or **Global**
+- ✅ Create all 12 agents with the correct format for your tool
+- ✅ Back up any existing agent configuration
+
+### Manual Installation
 
 ```bash
 # Clone the repository
 git clone https://github.com/ciign/agentic-engineering.git
 cd agentic-engineering
 
-# Run the setup script in your project directory
-./setup-claude-agents.sh
+# Run the setup script
+./setup-agents.sh
 
-# Start Claude Code from your project directory
-claude
-```
-
-The script will:
-- ✅ Copy `.claude-template/` to your project's `.claude/` directory
-- ✅ Back up any existing `.claude/` directory
-- ✅ Show you the team structure and usage tips
-
-### One-Line Install (from anywhere)
-
-```bash
-curl -sSL https://raw.githubusercontent.com/ciign/agentic-engineering/main/setup-claude-agents.sh | bash
+# Start your AI coding tool
+claude    # for Claude Code
+opencode  # for OpenCode
 ```
 
 ## 👥 The Team: 6 + 6 Balance
@@ -288,6 +293,7 @@ worker agents → code-reviewer → security-auditor → test-writer
 
 After running the setup script:
 
+**Claude Code:**
 ```
 your-project/
 ├── .claude/
@@ -304,6 +310,15 @@ your-project/
 │       ├── code-reviewer.md
 │       ├── security-auditor.md
 │       └── test-writer.md
+└── [your project files]
+```
+
+**OpenCode:**
+```
+your-project/
+├── .opencode/
+│   └── agents/
+│       └── [same 12 agents with OpenCode format]
 └── [your project files]
 ```
 
@@ -426,7 +441,7 @@ Each worker agent embodies **practical, detail-oriented execution**:
 
 ## 🛠️ Requirements
 
-- [Claude Code](https://www.claude.com/product/claude-code) installed
+- **Claude Code** ([claude.ai/claude-code](https://claude.ai/claude-code)) OR **OpenCode** ([opencode.ai](https://opencode.ai))
 - Bash (for the setup script) - works on:
   - macOS
   - Linux
@@ -435,7 +450,8 @@ Each worker agent embodies **practical, detail-oriented execution**:
 ## 📖 Additional Resources
 
 - **[TEAM_ARCHITECTURE.md](TEAM_ARCHITECTURE.md)** - Detailed team dynamics, Jungian cognitive functions, and collaboration patterns with visual diagrams
-- **[Claude Code Documentation](https://www.claude.com/product/claude-code)** - Official Claude Code docs
+- **[Claude Code Documentation](https://docs.anthropic.com/en/docs/claude-code)** - Official Claude Code docs
+- **[OpenCode Documentation](https://opencode.ai/docs)** - Official OpenCode docs
 - **Individual Agent Files** - Each agent's `.md` file contains their philosophy, approach, and expertise
 
 ## 🎨 Design Philosophy
@@ -494,7 +510,7 @@ See the [LICENSE](LICENSE) file for details or visit [unlicense.org](https://unl
 
 ## 🙏 Acknowledgments
 
-- Built for use with [Claude Code](https://www.claude.com/product/claude-code)
+- Built for use with [Claude Code](https://claude.ai/claude-code) and [OpenCode](https://opencode.ai)
 - Based on Carl Jung's theory of cognitive functions
 - Inspired by best practices from high-performing software teams
 - Community contributions and feedback
@@ -503,7 +519,8 @@ See the [LICENSE](LICENSE) file for details or visit [unlicense.org](https://unl
 
 - **Issues**: [GitHub Issues](https://github.com/ciign/agentic-engineering/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/ciign/agentic-engineering/discussions)
-- **Documentation**: [Claude Code Docs](https://www.claude.com/product/claude-code)
+- **Claude Code Docs**: [docs.anthropic.com](https://docs.anthropic.com/en/docs/claude-code)
+- **OpenCode Docs**: [opencode.ai/docs](https://opencode.ai/docs)
 
 ## 🌟 Star History
 
