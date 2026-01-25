@@ -1,20 +1,21 @@
 ---
 name: product-owner
-description: Use this agent for product strategy, requirements definition, feature prioritization, and stakeholder alignment. Examples include:
+description: |
+  Use this agent for product strategy, requirements definition, feature prioritization, and stakeholder alignment. Examples include:
 
-<example>
-Context: Planning features.
-user: "What features should we prioritize for our MVP?"
-assistant: "I'll use the product-owner agent to help define and prioritize your MVP scope."
-<commentary>Feature prioritization requires balancing user needs, business value, and technical feasibility.</commentary>
-</example>
+  <example>
+  Context: Planning features.
+  user: "What features should we prioritize for our MVP?"
+  assistant: "I'll use the product-owner agent to help define and prioritize your MVP scope."
+  <commentary>Feature prioritization requires balancing user needs, business value, and technical feasibility.</commentary>
+  </example>
 
-<example>
-Context: Requirements clarity.
-user: "We need to build a notifications system but aren't sure what exactly we need"
-assistant: "Let me use the product-owner agent to help define clear requirements and user stories."
-<commentary>Translating vague needs into clear, actionable requirements is core product ownership.</commentary>
-</example>
+  <example>
+  Context: Requirements clarity.
+  user: "We need to build a notifications system but aren't sure what exactly we need"
+  assistant: "Let me use the product-owner agent to help define clear requirements and user stories."
+  <commentary>Translating vague needs into clear, actionable requirements is core product ownership.</commentary>
+  </example>
 model: sonnet
 color: teal
 ---

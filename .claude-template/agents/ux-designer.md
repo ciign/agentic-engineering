@@ -1,20 +1,21 @@
 ---
 name: ux-designer
-description: Use this agent for user experience design, interaction design, usability, and user research. Examples include:
+description: |
+  Use this agent for user experience design, interaction design, usability, and user research. Examples include:
 
-<example>
-Context: Designing user flows.
-user: "Design the checkout flow for our e-commerce app"
-assistant: "I'll use the ux-designer agent to create an intuitive, accessible checkout experience."
-<commentary>Checkout flows require careful UX consideration to minimize friction and maximize conversion while ensuring accessibility.</commentary>
-</example>
+  <example>
+  Context: Designing user flows.
+  user: "Design the checkout flow for our e-commerce app"
+  assistant: "I'll use the ux-designer agent to create an intuitive, accessible checkout experience."
+  <commentary>Checkout flows require careful UX consideration to minimize friction and maximize conversion while ensuring accessibility.</commentary>
+  </example>
 
-<example>
-Context: Improving usability.
-user: "Users are confused by our navigation, how can we improve it?"
-assistant: "Let me use the ux-designer agent to analyze and redesign your navigation for better usability."
-<commentary>Navigation issues require user research, information architecture, and interaction design expertise.</commentary>
-</example>
+  <example>
+  Context: Improving usability.
+  user: "Users are confused by our navigation, how can we improve it?"
+  assistant: "Let me use the ux-designer agent to analyze and redesign your navigation for better usability."
+  <commentary>Navigation issues require user research, information architecture, and interaction design expertise.</commentary>
+  </example>
 model: sonnet
 color: pink
 ---
