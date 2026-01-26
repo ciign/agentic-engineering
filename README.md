@@ -4,7 +4,7 @@
 
 <img src="images/agentic-engineering.png" alt="Agentic Engineering Logo" width="250" />
 
-**A psychologically-balanced team of 12 specialized AI agents for software development.**
+**12 specialized AI agents + 3 configurable skills for software development.**
 
 *Works with **Claude Code** and **OpenCode**. Based on **Jungian cognitive functions** for optimal team dynamics.*
 
@@ -114,6 +114,7 @@ The script will:
 - 🤖 Ask you to choose: **Claude Code** or **OpenCode**
 - 📁 Ask for installation location: **Project** or **Global**
 - ✅ Create all 12 agents with the correct format for your tool
+- ✅ Create 3 skills (`/react`, `/docker`, `/python`) with per-skill config templates
 - ✅ Back up any existing agent configuration
 
 ### Manual Installation
@@ -167,6 +168,89 @@ These agents **guide** and **validate** work:
 | Agent | Color | Focus | Cognitive Function |
 |-------|-------|-------|-------------------|
 | **ux-designer** | 🩷 Pink | User research, accessibility, experience | Feeling |
+
+## ⚡ Skills (Slash Commands)
+
+Skills are project-aware slash commands that know your specific setup. Each skill reads a `config.md` file with your project's paths, tools, and conventions.
+
+### Available Skills
+
+| Skill | Invocation | Description |
+|-------|-----------|-------------|
+| **React** | `/react [command]` | React/Next.js development — components, hooks, dev server, builds |
+| **Docker** | `/docker [command]` | Docker operations — build, run, compose, logs, cleanup |
+| **Python** | `/python [command]` | Python development — uv, pipenv, pip, pytest, frameworks |
+
+### Per-Skill Configuration
+
+Each skill has a `config.md` template you edit to match your project:
+
+```
+skills/
+├── react/
+│   ├── SKILL.md        # Skill instructions (don't edit)
+│   └── config.md       # YOUR project config (edit this)
+├── docker/
+│   ├── SKILL.md
+│   └── config.md       # Your Dockerfiles, services, ports
+└── python/
+    ├── SKILL.md
+    └── config.md       # Your framework, package manager, commands
+```
+
+**Example — `docker/config.md`:**
+```markdown
+## Dockerfiles
+- Primary: `./Dockerfile`
+- Dev: `./Dockerfile.dev`
+
+## Services
+| Service | Port | Description |
+|---------|------|-------------|
+| app     | 3000 | Main application |
+| db      | 5432 | PostgreSQL database |
+
+## Common Commands
+- Start dev: `docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d`
+- Rebuild: `docker compose build --no-cache app`
+```
+
+**Example — `python/config.md`:**
+```markdown
+## Project
+- Package manager: `uv`   <!-- uv, pipenv, pip, poetry, pdm -->
+- Framework: `FastAPI`
+
+## Commands
+- Run: `uv run uvicorn src.main:app --reload`
+- Test: `uv run pytest -v`
+- Add dependency: `uv add <package>`
+```
+
+The Python skill supports **uv** (default), **pipenv**, and **pip**. Change the `Package manager` line in config.md and the skill adapts.
+
+### Skill Usage Examples
+
+```bash
+# React
+/react component UserProfile    # Generate a TypeScript component
+/react dev                      # Start dev server
+/react hook useAuth             # Create a custom hook
+
+# Docker
+/docker up                      # Start services (uses your compose config)
+/docker build myapp:latest      # Build image
+/docker logs app                # View logs for your app service
+/docker init node               # Generate a Dockerfile for Node.js
+
+# Python
+/python init                    # Scaffold project with pyproject.toml
+/python test                    # Run tests
+/python fastapi                 # Generate FastAPI project structure
+/python uv add requests         # Add a dependency with uv
+```
+
+---
 
 ## 💡 How to Use the Agents
 
@@ -243,11 +327,20 @@ These agents **guide** and **validate** work:
 @system-architect design scalable architecture for task app
 @database-designer design data model for tasks and users
 
-# 3. Execute implementation (Execution)
+# 3. Scaffold with skills
+/python init                           # Scaffold Python project with uv
+/python fastapi                        # Generate FastAPI structure
+/react init vite                       # Init React frontend with Vite
+
+# 4. Execute implementation (Execution)
 @full-stack-developer implement core task CRUD features
 @devops-engineer set up CI/CD pipeline
 
-# 4. Ensure quality (Quality)
+# 5. Containerize and deploy
+/docker init node                      # Generate production Dockerfile
+/docker up                             # Start services locally
+
+# 6. Ensure quality (Quality)
 @security-auditor review authentication and authorization
 @test-writer create comprehensive test suite
 @code-reviewer final review before deployment
@@ -258,6 +351,7 @@ These agents **guide** and **validate** work:
 ```bash
 # 1. Prepare infrastructure (Execution)
 @devops-engineer set up production infrastructure on AWS
+/docker build myapp:prod               # Build production image
 
 # 2. Security audit (Quality)
 @security-auditor perform pre-deployment security review
@@ -269,18 +363,18 @@ These agents **guide** and **validate** work:
 @code-reviewer verify deployment configuration
 ```
 
-### Agent Collaboration Patterns
+### Agent + Skills Collaboration Patterns
 
 **Product Development Flow:**
 ```
-product-owner → ux-designer → system-architect → worker agents → governance agents
-(what to build) (how users use it) (how to build it) (build it) (validate it)
+product-owner → ux-designer → system-architect → skills + workers → governance agents
+(what to build) (how users use it) (how to build it) (scaffold & build) (validate it)
 ```
 
-**Technical Decision Making:**
+**Build with Skills:**
 ```
-system-architect ←→ worker agents ←→ governance agents
-(provides patterns)  (implements)    (validates quality)
+/python init → @backend-specialist → /docker init → @devops-engineer → @code-reviewer
+(scaffold)    (implement logic)      (containerize)  (deploy)           (validate)
 ```
 
 **Quality Assurance:**
@@ -297,19 +391,29 @@ After running the setup script:
 ```
 your-project/
 ├── .claude/
-│   └── agents/
-│       ├── backend-specialist.md
-│       ├── frontend-specialist.md
-│       ├── database-designer.md
-│       ├── devops-engineer.md
-│       ├── full-stack-developer.md
-│       ├── debugger.md
-│       ├── product-owner.md
-│       ├── ux-designer.md
-│       ├── system-architect.md
-│       ├── code-reviewer.md
-│       ├── security-auditor.md
-│       └── test-writer.md
+│   ├── agents/
+│   │   ├── backend-specialist.md
+│   │   ├── frontend-specialist.md
+│   │   ├── database-designer.md
+│   │   ├── devops-engineer.md
+│   │   ├── full-stack-developer.md
+│   │   ├── debugger.md
+│   │   ├── product-owner.md
+│   │   ├── ux-designer.md
+│   │   ├── system-architect.md
+│   │   ├── code-reviewer.md
+│   │   ├── security-auditor.md
+│   │   └── test-writer.md
+│   └── skills/
+│       ├── react/
+│       │   ├── SKILL.md
+│       │   └── config.md        ← edit this for your project
+│       ├── docker/
+│       │   ├── SKILL.md
+│       │   └── config.md        ← edit this for your project
+│       └── python/
+│           ├── SKILL.md
+│           └── config.md        ← edit this for your project
 └── [your project files]
 ```
 
@@ -317,12 +421,22 @@ your-project/
 ```
 your-project/
 ├── .opencode/
-│   └── agents/
-│       └── [same 12 agents with OpenCode format]
+│   ├── agents/
+│   │   └── [same 12 agents with OpenCode format]
+│   └── skills/
+│       ├── react/
+│       │   ├── SKILL.md
+│       │   └── config.md        ← edit this for your project
+│       ├── docker/
+│       │   ├── SKILL.md
+│       │   └── config.md        ← edit this for your project
+│       └── python/
+│           ├── SKILL.md
+│           └── config.md        ← edit this for your project
 └── [your project files]
 ```
 
-## 🎯 When to Use Which Agent
+## 🎯 When to Use What
 
 ### "What should we build?"
 - **@product-owner** - Requirements, priorities, business value
@@ -332,15 +446,28 @@ your-project/
 - **@system-architect** - Architecture, patterns, scalability
 - **@database-designer** - Data models, schema design
 
+### "Scaffold & set up"
+- **/python init** - Scaffold Python project (uv, FastAPI, Django, Flask)
+- **/react init** - Scaffold React/Next.js project
+- **/docker init** - Generate Dockerfile for any language
+
 ### "Build the feature"
 - **@backend-specialist** - APIs, business logic, server-side
 - **@frontend-specialist** - UI, components, client-side
 - **@full-stack-developer** - Complete features end-to-end
 - **@database-designer** - Schemas, queries, migrations
 - **@devops-engineer** - Infrastructure, deployment
+- **/react component Name** - Generate React components
+- **/python uv add package** - Manage Python dependencies
+
+### "Run & deploy"
+- **/docker up** - Start services
+- **/docker build** - Build images
+- **@devops-engineer** - CI/CD, cloud deployment
 
 ### "Fix the bug"
 - **@debugger** - Diagnose and fix issues
+- **/docker logs** - Check container logs
 
 ### "Is it good quality?"
 - **@code-reviewer** - Code quality, maintainability
@@ -452,7 +579,10 @@ Each worker agent embodies **practical, detail-oriented execution**:
 - **[TEAM_ARCHITECTURE.md](TEAM_ARCHITECTURE.md)** - Detailed team dynamics, Jungian cognitive functions, and collaboration patterns with visual diagrams
 - **[Claude Code Documentation](https://docs.anthropic.com/en/docs/claude-code)** - Official Claude Code docs
 - **[OpenCode Documentation](https://opencode.ai/docs)** - Official OpenCode docs
+- **[OpenCode Skills Docs](https://opencode.ai/docs/skills)** - How skills work in OpenCode
+- **[Claude Code Skills Docs](https://code.claude.com/docs/en/skills)** - How skills work in Claude Code
 - **Individual Agent Files** - Each agent's `.md` file contains their philosophy, approach, and expertise
+- **Skill Config Files** - Each skill's `config.md` file is the place to customize for your project
 
 ## 📚 Interactive Learning Deck
 
@@ -507,8 +637,9 @@ Contributions are welcome! When proposing new agents, consider:
 
 ### Ideas for Enhancements
 
+- **New skills** — Terraform, Kubernetes, AWS CLI, database migrations
 - **Industry-specific agents** (FinTech, Healthcare, E-commerce)
-- **Language-specific specialists** (Python, Go, Rust, TypeScript)
+- **Language-specific specialists** (Go, Rust, TypeScript, Java)
 - **Platform-specific agents** (Mobile, Desktop, Embedded)
 - **Advanced capabilities** (AI/ML, Data Engineering, Performance Optimization)
 
