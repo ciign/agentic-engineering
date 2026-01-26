@@ -41,10 +41,12 @@ fi
 case $choice in
     2)
         AGENT_DIR="$HOME/.config/opencode/agents"
+        SKILLS_DIR="$HOME/.config/opencode/skills"
         echo -e "${BLUE}Installing globally to $AGENT_DIR${NC}"
         ;;
     *)
         AGENT_DIR=".opencode/agents"
+        SKILLS_DIR=".opencode/skills"
         echo -e "${BLUE}Installing to project: $AGENT_DIR${NC}"
         ;;
 esac
@@ -766,9 +768,361 @@ As a quality governance agent, you:
 - Focus on behavior coverage, not just line coverage
 EOF
 
+# ============================================================
+# SKILLS (Slash Commands)
+# ============================================================
+
+echo -e "${CYAN}Creating Skills (Slash Commands)...${NC}"
+
+# React Skill
+mkdir -p "$SKILLS_DIR/react"
+cat > "$SKILLS_DIR/react/SKILL.md" << 'EOF'
+---
+name: react
+description: React development tasks including creating components, hooks, context providers, setting up projects, running dev servers, and managing dependencies. Use when working with React, Next.js, or related frontend frameworks.
+---
+
+## React Development Skill
+
+You are a React development assistant. When invoked, help with React tasks following these guidelines.
+
+## IMPORTANT: Read Project Config First
+
+Before executing any command, read the project-specific config file at `config.md` in this skill's directory (`.opencode/skills/react/config.md` or `~/.config/opencode/skills/react/config.md`). This file contains your project's framework, package manager, directory structure, styling, and state management choices. **Always follow the patterns and paths from config.md instead of defaults.** If config.md is not found, fall back to the defaults below.
+
+## Commands
+
+Based on the arguments provided, perform the appropriate action:
+
+### Project Setup
+- `init` - Initialize a new React project: `npx create-react-app $ARGUMENTS` or `npx create-next-app $ARGUMENTS`
+- `init vite` - Initialize with Vite: `npm create vite@latest $ARGUMENTS -- --template react-ts`
+
+### Development
+- `dev` - Start the development server: `npm run dev` or `npm start`
+- `build` - Create a production build: `npm run build`
+- `test` - Run tests: `npm test`
+- `lint` - Run linter: `npm run lint`
+
+### Code Generation
+- `component <Name>` - Create a new React component with TypeScript
+- `hook <name>` - Create a custom hook
+- `context <Name>` - Create a context provider
+- `page <Name>` - Create a new page/route component
+
+## Conventions
+
+When generating React code:
+
+1. **Use functional components** with TypeScript
+2. **Props interfaces** defined above the component
+3. **File structure**: one component per file, co-located tests
+4. **Naming**: PascalCase for components, camelCase for hooks (prefixed with `use`)
+5. **State management**: prefer `useState`/`useReducer` for local, Context for shared, external store for global
+6. **Error boundaries**: wrap major sections
+7. **Memoization**: use `useMemo`/`useCallback` only when profiling shows need
+
+## Component Template
+
+```tsx
+interface Props {
+  // define props
+}
+
+export function ComponentName({ ...props }: Props) {
+  return (
+    <div>
+      {/* implementation */}
+    </div>
+  );
+}
+```
+
+## Hook Template
+
+```tsx
+export function useHookName(initialValue: Type) {
+  const [state, setState] = useState<Type>(initialValue);
+
+  // hook logic
+
+  return { state } as const;
+}
+```
+EOF
+
+# Docker Skill
+mkdir -p "$SKILLS_DIR/docker"
+cat > "$SKILLS_DIR/docker/SKILL.md" << 'EOF'
+---
+name: docker
+description: Run Docker commands including building images, running containers, managing docker-compose services, viewing logs, and container cleanup. Use when working with Docker, containers, or containerized deployments.
+---
+
+## Docker Operations Skill
+
+You are a Docker operations assistant. When invoked, execute Docker commands and help manage containerized applications.
+
+## IMPORTANT: Read Project Config First
+
+Before executing any command, read the project-specific config file at `config.md` in this skill's directory (`.opencode/skills/docker/config.md` or `~/.config/opencode/skills/docker/config.md`). This file contains your Dockerfiles, compose files, service names, ports, registry, and common commands. **Always use the paths, service names, and commands from config.md instead of defaults.** If config.md is not found, fall back to the defaults below.
+
+## Commands
+
+Based on the arguments provided, perform the appropriate action:
+
+### Images
+- `build` - Build image from Dockerfile: `docker build -t $ARGUMENTS .`
+- `build <tag>` - Build with specific tag: `docker build -t <tag> .`
+- `images` - List all images: `docker images`
+- `rmi <image>` - Remove an image: `docker rmi <image>`
+
+### Containers
+- `run <image>` - Run a container: `docker run -d <image>`
+- `run <image> -p <host>:<container>` - Run with port mapping
+- `ps` - List running containers: `docker ps`
+- `ps -a` - List all containers: `docker ps -a`
+- `stop <container>` - Stop a container: `docker stop <container>`
+- `rm <container>` - Remove a container: `docker rm <container>`
+- `logs <container>` - View container logs: `docker logs -f <container>`
+- `exec <container> <cmd>` - Execute command in container: `docker exec -it <container> <cmd>`
+- `shell <container>` - Open shell in container: `docker exec -it <container> /bin/sh`
+
+### Docker Compose
+- `up` - Start services: `docker compose up -d`
+- `down` - Stop services: `docker compose down`
+- `restart` - Restart services: `docker compose restart`
+- `logs` - View compose logs: `docker compose logs -f`
+- `status` - Show service status: `docker compose ps`
+
+### Cleanup
+- `prune` - Remove unused resources: `docker system prune -f`
+- `prune-all` - Remove everything unused: `docker system prune -a -f --volumes`
+
+### Dockerfile Generation
+- `init <language>` - Generate a Dockerfile for the specified language/framework
+
+## Best Practices
+
+When generating Dockerfiles:
+
+1. **Use multi-stage builds** to minimize image size
+2. **Pin base image versions** (e.g., `node:22-alpine`, not `node:latest`)
+3. **Copy dependency files first** for better layer caching
+4. **Run as non-root user** in production
+5. **Use `.dockerignore`** to exclude unnecessary files
+6. **Minimize layers** by combining RUN commands
+7. **Use HEALTHCHECK** for production images
+EOF
+
+# Python Skill
+mkdir -p "$SKILLS_DIR/python"
+cat > "$SKILLS_DIR/python/SKILL.md" << 'EOF'
+---
+name: python
+description: Python development tasks including creating scripts, managing virtual environments, running tests, installing packages, and project setup. Use when working with Python, FastAPI, Django, Flask, or related frameworks.
+---
+
+## Python Development Skill
+
+You are a Python development assistant. When invoked, help with Python tasks following these guidelines.
+
+## IMPORTANT: Read Project Config First
+
+Before executing any command, read the project-specific config file at `config.md` in this skill's directory (`.opencode/skills/python/config.md` or `~/.config/opencode/skills/python/config.md`). This file contains your framework, Python version, package manager, directory structure, virtual environment, database, and project-specific commands. **Always follow the patterns and paths from config.md instead of defaults.** If config.md is not found, fall back to the defaults below.
+
+## Commands
+
+Based on the arguments provided, perform the appropriate action:
+
+### Project Setup
+- `init` - Initialize a Python project with pyproject.toml, src layout, and virtual environment
+- `venv` - Create virtual environment (uses package manager from config)
+- `install` - Install dependencies
+- `install <pkg>` - Install a package
+- `freeze` - Lock/save dependencies
+
+### Package Managers (check config.md for which one to use)
+
+**uv (default, recommended)**:
+- `uv init` - Initialize project: `uv init`
+- `uv venv` - Create venv: `uv venv`
+- `uv add <pkg>` - Add dependency: `uv add <pkg>`
+- `uv add --dev <pkg>` - Add dev dependency: `uv add --dev <pkg>`
+- `uv sync` - Install all dependencies: `uv sync`
+- `uv run <cmd>` - Run command in venv: `uv run <cmd>`
+- `uv lock` - Lock dependencies: `uv lock`
+
+**pipenv**:
+- `pipenv init` - Initialize: `pipenv --python 3.12`
+- `pipenv install` - Install from Pipfile: `pipenv install`
+- `pipenv install <pkg>` - Add dependency: `pipenv install <pkg>`
+- `pipenv install --dev <pkg>` - Add dev dependency: `pipenv install --dev <pkg>`
+- `pipenv shell` - Activate venv: `pipenv shell`
+- `pipenv run <cmd>` - Run command: `pipenv run <cmd>`
+- `pipenv lock` - Lock dependencies: `pipenv lock`
+
+**pip (legacy)**:
+- `pip venv` - Create venv: `python3 -m venv .venv && source .venv/bin/activate`
+- `pip install` - Install: `pip install -r requirements.txt`
+- `pip install <pkg>` - Install package: `pip install <pkg>`
+- `pip freeze` - Save deps: `pip freeze > requirements.txt`
+
+### Development
+- `run <file>` - Run a Python script: `python <file>`
+- `test` - Run tests: `python -m pytest`
+- `test <path>` - Run specific tests: `python -m pytest <path> -v`
+- `lint` - Run linter: `ruff check .`
+- `format` - Format code: `ruff format .`
+- `typecheck` - Type check: `mypy .`
+
+### Frameworks
+- `fastapi` - Create a FastAPI project structure
+- `django <name>` - Create a Django project: `django-admin startproject <name>`
+- `flask` - Create a Flask project structure
+
+### Utilities
+- `repl` - Start Python REPL: `python3`
+- `shell` - Activate venv and open shell
+
+## Conventions
+
+When generating Python code:
+
+1. **Use type hints** for all function signatures
+2. **Docstrings** in Google style for public functions
+3. **File structure**: flat for small projects, src layout for packages
+4. **Naming**: snake_case for functions/variables, PascalCase for classes
+5. **Error handling**: specific exceptions, not bare `except`
+6. **Imports**: standard library, third-party, local (separated by blank lines)
+7. **Testing**: pytest with fixtures, parametrize for multiple cases
+EOF
+
+# Create per-skill config templates
+echo -e "${CYAN}Creating skill config templates...${NC}"
+
+cat > "$SKILLS_DIR/react/config.md" << 'EOF'
+# React Project Config
+
+## Project
+- Framework: `Next.js` <!-- React, Next.js, Vite, Remix -->
+- Package manager: `npm` <!-- npm, yarn, pnpm, bun -->
+- Language: `TypeScript`
+
+## Structure
+- Source: `./src`
+- Components: `./src/components`
+- Pages/Routes: `./src/app`
+- Hooks: `./src/hooks`
+- Utils: `./src/lib`
+- Styles: `./src/styles`
+- Tests: `./src/__tests__`
+
+## Component Pattern
+- Style: `functional` <!-- functional, class -->
+- Styling: `Tailwind CSS` <!-- Tailwind, CSS Modules, Styled Components, vanilla CSS -->
+- State: `Zustand` <!-- Redux, Zustand, Context, Jotai, none -->
+- Data fetching: `React Query` <!-- React Query, SWR, fetch, axios -->
+
+## Commands
+- Dev server: `npm run dev`
+- Build: `npm run build`
+- Test: `npm test`
+- Lint: `npm run lint`
+- Format: `npx prettier --write .`
+
+## API
+- Base URL: `/api`
+- Auth: `JWT in cookies`
+
+## Notes
+<!-- Add any project-specific React notes here -->
+EOF
+
+cat > "$SKILLS_DIR/docker/config.md" << 'EOF'
+# Docker Project Config
+
+## Dockerfiles
+- Primary: `./Dockerfile`
+- Dev: `./Dockerfile.dev`
+
+## Compose
+- File: `./docker-compose.yml`
+- Dev override: `./docker-compose.dev.yml`
+
+## Services
+| Service | Port | Description |
+|---------|------|-------------|
+| app     | 3000 | Main application |
+| db      | 5432 | PostgreSQL database |
+
+## Registry
+- Registry: `ghcr.io/myorg/myapp`
+- Tag strategy: `git-sha`
+
+## Common Commands
+- Start dev: `docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d`
+- Rebuild: `docker compose build --no-cache app`
+- Migrate DB: `docker compose exec app python manage.py migrate`
+- View logs: `docker compose logs -f app`
+
+## Environment
+- Env file: `.env`
+- Required vars: `DATABASE_URL`, `SECRET_KEY`, `REDIS_URL`
+
+## Notes
+<!-- Add any project-specific Docker notes here -->
+EOF
+
+cat > "$SKILLS_DIR/python/config.md" << 'EOF'
+# Python Project Config
+
+## Project
+- Framework: `FastAPI` <!-- FastAPI, Django, Flask, none -->
+- Python version: `3.12`
+- Package manager: `uv` <!-- uv, pipenv, pip, poetry, pdm -->
+
+## Structure
+- Source: `./src`
+- Tests: `./tests`
+- Config: `./pyproject.toml`
+- Entry point: `./src/main.py`
+
+## Virtual Environment
+- Path: `./.venv`
+- Activate: `source .venv/bin/activate`
+- Managed by: `uv` <!-- uv manages venv automatically -->
+
+## Commands
+- Run: `uv run uvicorn src.main:app --reload`
+- Test: `uv run pytest -v`
+- Lint: `uv run ruff check .`
+- Format: `uv run ruff format .`
+- Type check: `uv run mypy src/`
+- Install all: `uv sync`
+- Add dependency: `uv add <package>`
+- Add dev dependency: `uv add --dev <package>`
+- Lock: `uv lock`
+
+## Database
+- Type: `PostgreSQL` <!-- PostgreSQL, SQLite, MongoDB, none -->
+- ORM: `SQLAlchemy` <!-- SQLAlchemy, Django ORM, Tortoise, none -->
+- Migrations: `alembic` <!-- alembic, django, none -->
+- Migrate: `alembic upgrade head`
+
+## API
+- Docs: `http://localhost:8000/docs`
+- Port: `8000`
+
+## Notes
+<!-- Add any project-specific Python notes here -->
+EOF
+
+echo -e "${GREEN}Config templates created. Edit them to match your project.${NC}"
+
 echo ""
 echo -e "${GREEN}============================================================${NC}"
-echo -e "${GREEN}  Successfully installed 12 agents to $AGENT_DIR${NC}"
+echo -e "${GREEN}  Successfully installed 12 agents + 3 skills${NC}"
 echo -e "${GREEN}============================================================${NC}"
 echo ""
 echo -e "${BLUE}+------------------------------------------------------------+"
@@ -780,6 +1134,12 @@ echo -e "|  @database-designer           @ux-designer                |"
 echo -e "|  @devops-engineer             @code-reviewer              |"
 echo -e "|  @full-stack-developer        @security-auditor           |"
 echo -e "|  @debugger                    @test-writer                |"
+echo -e "+------------------------------------------------------------+"
+echo -e "|  SKILLS (Slash Commands)                                  |"
+echo -e "+------------------------------------------------------------+"
+echo -e "|  /react    - React/Next.js development                    |"
+echo -e "|  /docker   - Docker & Compose operations                  |"
+echo -e "|  /python   - Python development & frameworks              |"
 echo -e "+------------------------------------------------------------+${NC}"
 echo ""
 echo -e "${YELLOW}The Worker-Governance Pattern:${NC}"
@@ -788,15 +1148,17 @@ echo ""
 echo -e "${CYAN}Usage in OpenCode:${NC}"
 echo "  @product-owner define MVP for a task management API"
 echo "  @system-architect design the architecture"
-echo "  @backend-specialist implement the API"
+echo "  /python fastapi"
+echo "  /react component Dashboard"
+echo "  /docker up"
 echo "  @security-auditor review the auth implementation"
-echo "  @devops-engineer deploy to Cloud Run"
 echo ""
 echo -e "${YELLOW}Workflow:${NC}"
 echo "  1. VISION:       @product-owner @ux-designer"
 echo "  2. ARCHITECTURE: @system-architect @database-designer"
 echo "  3. EXECUTION:    @backend-specialist @frontend-specialist @devops-engineer"
-echo "  4. QUALITY:      @code-reviewer @security-auditor @test-writer"
+echo "  4. SKILLS:       /react /python /docker"
+echo "  5. QUALITY:      @code-reviewer @security-auditor @test-writer"
 echo ""
 echo -e "${GREEN}Start OpenCode with: opencode${NC}"
 echo ""
