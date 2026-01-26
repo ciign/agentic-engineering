@@ -544,7 +544,7 @@ create_opencode_agents() {
 name: backend-specialist
 description: Server-side development, API design, database optimization, and backend architecture
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
+model: opencode/big-pickle
 temperature: 0.2
 tools:
   write: true
@@ -585,7 +585,7 @@ EOF
 name: frontend-specialist
 description: UI/UX implementation, frontend performance optimization, and client-side architecture
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
+model: opencode/big-pickle
 temperature: 0.2
 tools:
   write: true
@@ -626,7 +626,7 @@ EOF
 name: database-designer
 description: Database schema design, query optimization, and data modeling
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
+model: opencode/big-pickle
 temperature: 0.2
 tools:
   write: true
@@ -668,7 +668,7 @@ EOF
 name: devops-engineer
 description: CI/CD, infrastructure, deployment, monitoring, and operational tasks
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
+model: opencode/big-pickle
 temperature: 0.2
 tools:
   write: true
@@ -710,7 +710,7 @@ EOF
 name: full-stack-developer
 description: Complete web application development spanning frontend, backend, and database layers
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
+model: opencode/big-pickle
 temperature: 0.3
 tools:
   write: true
@@ -751,7 +751,7 @@ EOF
 name: debugger
 description: Systematic bug diagnosis and resolution
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
+model: opencode/big-pickle
 temperature: 0.1
 tools:
   write: true
@@ -788,7 +788,7 @@ EOF
 name: system-architect
 description: High-level system design, architecture decisions, and technology selection
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
+model: opencode/big-pickle
 temperature: 0.4
 tools:
   write: true
@@ -829,7 +829,7 @@ EOF
 name: product-owner
 description: Product strategy, requirements definition, feature prioritization, and stakeholder alignment
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
+model: opencode/big-pickle
 temperature: 0.5
 tools:
   write: true
@@ -870,7 +870,7 @@ EOF
 name: ux-designer
 description: User experience design, interaction design, usability, and user research
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
+model: opencode/big-pickle
 temperature: 0.4
 tools:
   write: true
@@ -912,7 +912,7 @@ EOF
 name: code-reviewer
 description: Thorough code reviews focusing on bugs, security, performance, and best practices
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
+model: opencode/big-pickle
 temperature: 0.1
 tools:
   write: false
@@ -947,7 +947,7 @@ EOF
 name: security-auditor
 description: Security reviews, vulnerability assessment, and implementing security best practices
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
+model: opencode/big-pickle
 temperature: 0.1
 tools:
   write: false
@@ -992,7 +992,7 @@ EOF
 name: test-writer
 description: Creating comprehensive test suites including unit, integration, and end-to-end tests
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
+model: opencode/big-pickle
 temperature: 0.2
 tools:
   write: true

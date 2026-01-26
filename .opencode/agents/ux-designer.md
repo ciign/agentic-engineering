@@ -2,7 +2,7 @@
 name: ux-designer
 description: User experience design, interaction design, usability, and user research
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
+model: opencode/big-pickle
 temperature: 0.4
 tools:
   write: true

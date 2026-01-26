@@ -2,7 +2,7 @@
 name: product-owner
 description: Product strategy, requirements definition, feature prioritization, and stakeholder alignment
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
+model: opencode/big-pickle
 temperature: 0.5
 tools:
   write: true

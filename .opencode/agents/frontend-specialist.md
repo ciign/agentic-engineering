@@ -2,7 +2,7 @@
 name: frontend-specialist
 description: UI/UX implementation, frontend performance optimization, and client-side architecture
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
+model: opencode/big-pickle
 temperature: 0.2
 tools:
   write: true

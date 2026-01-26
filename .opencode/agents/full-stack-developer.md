@@ -2,7 +2,7 @@
 name: full-stack-developer
 description: Complete web application development spanning frontend, backend, and database layers
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
+model: opencode/big-pickle
 temperature: 0.3
 tools:
   write: true

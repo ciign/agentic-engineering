@@ -2,7 +2,7 @@
 name: debugger
 description: Systematic bug diagnosis and resolution
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
+model: opencode/big-pickle
 temperature: 0.1
 tools:
   write: true

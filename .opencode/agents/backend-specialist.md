@@ -2,7 +2,7 @@
 name: backend-specialist
 description: Server-side development, API design, database optimization, and backend architecture
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
+model: opencode/big-pickle
 temperature: 0.2
 tools:
   write: true

@@ -2,7 +2,7 @@
 name: devops-engineer
 description: CI/CD, infrastructure, deployment, monitoring, and operational tasks
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
+model: opencode/big-pickle
 temperature: 0.2
 tools:
   write: true
